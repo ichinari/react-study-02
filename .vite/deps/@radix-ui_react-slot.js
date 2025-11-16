@@ -2,12 +2,13 @@ import {
   require_react
 } from "./chunk-IGXLOIK6.js";
 import {
-  __commonJS
+  __commonJS,
+  __toESM
 } from "./chunk-5WRI5ZAA.js";
 
-// node_modules/react/cjs/react-jsx-dev-runtime.development.js
-var require_react_jsx_dev_runtime_development = __commonJS({
-  "node_modules/react/cjs/react-jsx-dev-runtime.development.js"(exports) {
+// node_modules/react/cjs/react-jsx-runtime.development.js
+var require_react_jsx_runtime_development = __commonJS({
+  "node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
     "use strict";
     (function() {
       function getComponentNameFromType(type) {
@@ -46,7 +47,7 @@ var require_react_jsx_dev_runtime_development = __commonJS({
               return type;
             case REACT_MEMO_TYPE:
               return innerType = type.displayName || null, null !== innerType ? innerType : getComponentNameFromType(type.type) || "Memo";
-            case REACT_LAZY_TYPE:
+            case REACT_LAZY_TYPE2:
               innerType = type._payload;
               type = type._init;
               try {
@@ -80,7 +81,7 @@ var require_react_jsx_dev_runtime_development = __commonJS({
       }
       function getTaskName(type) {
         if (type === REACT_FRAGMENT_TYPE) return "<>";
-        if ("object" === typeof type && null !== type && type.$$typeof === REACT_LAZY_TYPE)
+        if ("object" === typeof type && null !== type && type.$$typeof === REACT_LAZY_TYPE2)
           return "<...>";
         try {
           var name = getComponentNameFromType(type);
@@ -214,35 +215,46 @@ var require_react_jsx_dev_runtime_development = __commonJS({
         );
       }
       function validateChildKeys(node) {
-        isValidElement(node) ? node._store && (node._store.validated = 1) : "object" === typeof node && null !== node && node.$$typeof === REACT_LAZY_TYPE && ("fulfilled" === node._payload.status ? isValidElement(node._payload.value) && node._payload.value._store && (node._payload.value._store.validated = 1) : node._store && (node._store.validated = 1));
+        isValidElement2(node) ? node._store && (node._store.validated = 1) : "object" === typeof node && null !== node && node.$$typeof === REACT_LAZY_TYPE2 && ("fulfilled" === node._payload.status ? isValidElement2(node._payload.value) && node._payload.value._store && (node._payload.value._store.validated = 1) : node._store && (node._store.validated = 1));
       }
-      function isValidElement(object) {
+      function isValidElement2(object) {
         return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
       }
-      var React = require_react(), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), ReactSharedInternals = React.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+      var React3 = require_react(), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE2 = Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
         return null;
       };
-      React = {
+      React3 = {
         react_stack_bottom_frame: function(callStackForError) {
           return callStackForError();
         }
       };
       var specialPropKeyWarningShown;
       var didWarnAboutElementRef = {};
-      var unknownOwnerDebugStack = React.react_stack_bottom_frame.bind(
-        React,
+      var unknownOwnerDebugStack = React3.react_stack_bottom_frame.bind(
+        React3,
         UnknownOwner
       )();
       var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
       var didWarnAboutKeySpread = {};
       exports.Fragment = REACT_FRAGMENT_TYPE;
-      exports.jsxDEV = function(type, config, maybeKey, isStaticChildren) {
+      exports.jsx = function(type, config, maybeKey) {
         var trackActualOwner = 1e4 > ReactSharedInternals.recentlyCreatedOwnerStacks++;
         return jsxDEVImpl(
           type,
           config,
           maybeKey,
-          isStaticChildren,
+          false,
+          trackActualOwner ? Error("react-stack-top-frame") : unknownOwnerDebugStack,
+          trackActualOwner ? createTask(getTaskName(type)) : unknownOwnerDebugTask
+        );
+      };
+      exports.jsxs = function(type, config, maybeKey) {
+        var trackActualOwner = 1e4 > ReactSharedInternals.recentlyCreatedOwnerStacks++;
+        return jsxDEVImpl(
+          type,
+          config,
+          maybeKey,
+          true,
           trackActualOwner ? Error("react-stack-top-frame") : unknownOwnerDebugStack,
           trackActualOwner ? createTask(getTaskName(type)) : unknownOwnerDebugTask
         );
@@ -251,15 +263,166 @@ var require_react_jsx_dev_runtime_development = __commonJS({
   }
 });
 
-// node_modules/react/jsx-dev-runtime.js
-var require_jsx_dev_runtime = __commonJS({
-  "node_modules/react/jsx-dev-runtime.js"(exports, module) {
+// node_modules/react/jsx-runtime.js
+var require_jsx_runtime = __commonJS({
+  "node_modules/react/jsx-runtime.js"(exports, module) {
+    "use strict";
     if (false) {
       module.exports = null;
     } else {
-      module.exports = require_react_jsx_dev_runtime_development();
+      module.exports = require_react_jsx_runtime_development();
     }
   }
 });
-export default require_jsx_dev_runtime();
-//# sourceMappingURL=react_jsx-dev-runtime.js.map
+
+// node_modules/@radix-ui/react-slot/dist/index.mjs
+var React2 = __toESM(require_react(), 1);
+
+// node_modules/@radix-ui/react-compose-refs/dist/index.mjs
+var React = __toESM(require_react(), 1);
+function setRef(ref, value) {
+  if (typeof ref === "function") {
+    return ref(value);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node);
+      if (!hasCleanup && typeof cleanup == "function") {
+        hasCleanup = true;
+      }
+      return cleanup;
+    });
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup == "function") {
+            cleanup();
+          } else {
+            setRef(refs[i], null);
+          }
+        }
+      };
+    }
+  };
+}
+
+// node_modules/@radix-ui/react-slot/dist/index.mjs
+var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
+var REACT_LAZY_TYPE = Symbol.for("react.lazy");
+var use = React2[" use ".trim().toString()];
+function isPromiseLike(value) {
+  return typeof value === "object" && value !== null && "then" in value;
+}
+function isLazyComponent(element) {
+  return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
+}
+function createSlot(ownerName) {
+  const SlotClone = createSlotClone(ownerName);
+  const Slot2 = React2.forwardRef((props, forwardedRef) => {
+    let { children, ...slotProps } = props;
+    if (isLazyComponent(children) && typeof use === "function") {
+      children = use(children._payload);
+    }
+    const childrenArray = React2.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (React2.Children.count(newElement) > 1) return React2.Children.only(null);
+          return React2.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return (0, import_jsx_runtime.jsx)(SlotClone, { ...slotProps, ref: forwardedRef, children: React2.isValidElement(newElement) ? React2.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return (0, import_jsx_runtime.jsx)(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+var Slot = createSlot("Slot");
+function createSlotClone(ownerName) {
+  const SlotClone = React2.forwardRef((props, forwardedRef) => {
+    let { children, ...slotProps } = props;
+    if (isLazyComponent(children) && typeof use === "function") {
+      children = use(children._payload);
+    }
+    if (React2.isValidElement(children)) {
+      const childrenRef = getElementRef(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== React2.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return React2.cloneElement(children, props2);
+    }
+    return React2.Children.count(children) > 1 ? React2.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
+function createSlottable(ownerName) {
+  const Slottable2 = ({ children }) => {
+    return (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
+  };
+  Slottable2.displayName = `${ownerName}.Slottable`;
+  Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
+  return Slottable2;
+}
+var Slottable = createSlottable("Slottable");
+function isSlottable(child) {
+  return React2.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+export {
+  Slot as Root,
+  Slot,
+  Slottable,
+  createSlot,
+  createSlottable
+};
+//# sourceMappingURL=@radix-ui_react-slot.js.map
