@@ -34,10 +34,10 @@ function App() {
   const playMusic = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
     audio.play();
-  }; 
+  };
 
   return (
-    <div className="p-6"> 
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Music List</h1>
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">Created Music</h2>
