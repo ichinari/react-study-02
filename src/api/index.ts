@@ -1,4 +1,5 @@
 import ky from "ky";
+import { createClient } from "@supabase/supabase-js";
 
 export const createApiClient = (
   prefixUrl: string,
@@ -11,4 +12,11 @@ export const createApiClient = (
       ...headers,
     },
   });
+};
+
+export const supabaseClient = <T>() => {
+  return createClient<T>(
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_ANON_KEY
+  );
 };
