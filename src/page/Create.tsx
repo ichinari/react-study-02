@@ -104,6 +104,33 @@ function Create() {
           rows={4}
         />
       </div>
+
+      {error && (
+        <div style={{ color: "red", marginTop: "10px" }}>エラー: {error}</div>
+      )}
+
+      {successMessage && (
+        <div style={{ color: "green", marginTop: "10px" }}>
+          {successMessage}
+        </div>
+      )}
+
+      <button
+        onClick={handleCreateMusic}
+        disabled={isLoading}
+        className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+      >
+        {isLoading ? "生成中..." : "Create Music"}
+      </button>
+
+      {generatedMusic && (
+        <div>
+          <h3>Generated Music</h3>
+          <audio controls>
+            <source src={generatedMusic.music_file_path} type="audio/mpeg" />
+          </audio>
+        </div>
+      )}
     </div>
   );
 }
