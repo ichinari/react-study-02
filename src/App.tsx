@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { getMusic } from "./api/supabase/music";
-
 function App() {
   // sample list data
   const musicList = [
@@ -33,21 +30,11 @@ function App() {
     },
   ];
 
-  // fetch music
-  const fetchMusic = async () => {
-    const result = await getMusic();
-    console.log(result);
-  };
-
   // play music
   const playMusic = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
     audio.play();
   };
-
-  useEffect(() => {
-    fetchMusic();
-  }, []);
 
   return (
     <div className="p-6">
