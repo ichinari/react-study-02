@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { promptSongs } from "@api/prompt-songs";
+import type { PromptSongsResponse } from "@api/prompt-songs";
 
 function Create() {
   const [musicTitle, setMusicTitle] = useState("");
   const [musicGenre, setMusicGenre] = useState("");
   const [musicDescription, setMusicDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [generatedMusic, setGeneratedMusic] =
+    useState<PromptSongsResponse | null>(null);
 
   const handleMusicTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMusicTitle(e.target.value);
@@ -19,8 +26,44 @@ function Create() {
     setMusicDescription(e.target.value);
   };
 
-  const handleCreateMusic = () => {
-    console.log("Create Music function called");
+  const handleCreateMusic = async () => {
+    // 入力値の検証
+    if (!musicTitle.trim() || !musicGenre || !musicDescription.trim())
+      return setError("すべての項目を入力してください");
+
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await promptSongs(
+        musicTitle,
+        musicGenre,
+        musicDescription
+      );
+
+      console.log("音楽生成成功:", response);
+
+      setSuccessMessage("音楽が正常に生成されました");
+      setGeneratedMusic(response);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "エラーが発生しました";
+      console.error("API呼び出しエラー:", err);
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+      resetForm();
+    }
+  };
+
+  // 入力をリセット
+  const resetForm = () => {
+    setMusicTitle("");
+    setMusicGenre("");
+    setMusicDescription("");
+    setError(null);
+    setSuccessMessage(null);
   };
 
   return (
@@ -61,7 +104,6 @@ function Create() {
           rows={4}
         />
       </div>
-      <button onClick={handleCreateMusic}>Create Music</button>
     </div>
   );
 }
