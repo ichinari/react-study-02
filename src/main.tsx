@@ -2,13 +2,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./css/index.css";
-import App from "./App.tsx";
+import List from "./page/List.tsx";
 import Create from "./page/Create.tsx";
 
 const rooter = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <List />,
   },
   {
     path: "/create",
