@@ -2,39 +2,54 @@
   "hash": "21508741",
   "configHash": "4985e1c3",
   "lockfileHash": "2add0b9e",
-  "browserHash": "5846757e",
+  "browserHash": "c67db5b7",
   "optimized": {
     "react/jsx-dev-runtime": {
       "src": "../../node_modules/react/jsx-dev-runtime.js",
       "file": "react_jsx-dev-runtime.js",
-      "fileHash": "4d3bb58a",
+      "fileHash": "100920c8",
       "needsInterop": true
     },
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "fae503f7",
+      "fileHash": "29180783",
       "needsInterop": true
     },
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "f854e980",
+      "fileHash": "93486427",
       "needsInterop": true
     },
     "react-router-dom": {
       "src": "../../node_modules/react-router-dom/dist/index.mjs",
       "file": "react-router-dom.js",
-      "fileHash": "a96be009",
+      "fileHash": "e30c5986",
+      "needsInterop": false
+    },
+    "@radix-ui/react-slot": {
+      "src": "../../node_modules/@radix-ui/react-slot/dist/index.mjs",
+      "file": "@radix-ui_react-slot.js",
+      "fileHash": "7003cb81",
+      "needsInterop": false
+    },
+    "class-variance-authority": {
+      "src": "../../node_modules/class-variance-authority/dist/index.mjs",
+      "file": "class-variance-authority.js",
+      "fileHash": "7d0cb636",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-BYNWFHQF": {
-      "file": "chunk-BYNWFHQF.js"
+    "chunk-RLBEVQI4": {
+      "file": "chunk-RLBEVQI4.js"
     },
-    "chunk-3PPUDOJL": {
-      "file": "chunk-3PPUDOJL.js"
+    "chunk-IGXLOIK6": {
+      "file": "chunk-IGXLOIK6.js"
+    },
+    "chunk-5WRI5ZAA": {
+      "file": "chunk-5WRI5ZAA.js"
     }
   }
 }
