@@ -32,6 +32,15 @@
       ],
       "@api/*": [
         "./src/api/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@rooter/*": [
+        "./src/rooter/*"
+      ],
+      "@page/*": [
+        "./src/page/*"
       ]
     }
   },
