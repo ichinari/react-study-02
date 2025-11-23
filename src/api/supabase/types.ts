@@ -11,7 +11,7 @@ export interface MusicColums {
   title?: string;
   duration?: number;
   music_file_path: string;
-  wave_from_file_path: string;
+  wave_form_file_path: string;
   music_created_date?: string;
   bpm?: number;
   key_id?: number;
