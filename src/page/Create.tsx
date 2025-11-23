@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { promptSongs } from "@api/prompt-songs";
+import { insertMusic } from "@api/supabase/music";
+
 import type { PromptSongsResponse } from "@api/prompt-songs";
+import type { MusicColums } from "@api/supabase/types";
 
 function Create() {
   const [musicTitle, setMusicTitle] = useState("");
@@ -11,6 +14,7 @@ function Create() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [generatedMusic, setGeneratedMusic] =
     useState<PromptSongsResponse | null>(null);
+  const [isSaved, setIsSaved] = useState(true);
 
   const handleMusicTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMusicTitle(e.target.value);
@@ -41,11 +45,10 @@ function Create() {
         musicGenre,
         musicDescription
       );
-
-      console.log("音楽生成成功:", response);
-
       setSuccessMessage("音楽が正常に生成されました");
       setGeneratedMusic(response);
+
+      if (!isSaved) setIsSaved(true);
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "エラーが発生しました";
@@ -64,6 +67,33 @@ function Create() {
     setMusicDescription("");
     setError(null);
     setSuccessMessage(null);
+  };
+
+  // save generated music
+  const saveMusic = async () => {
+    try {
+      const params: MusicColums = {
+        id: generatedMusic?.id || "",
+        title: generatedMusic?.title || "",
+        duration: generatedMusic?.duration || 0,
+        music_file_path: generatedMusic?.music_file_path || "",
+        wave_form_file_path: generatedMusic?.wave_form_file_path || "",
+        music_created_date: generatedMusic?.created_at,
+        bpm: generatedMusic?.bpm,
+        key_id: generatedMusic?.key?.id || 0,
+        key_name: generatedMusic?.key?.name || "",
+        key_active: generatedMusic?.key?.active || false,
+      };
+
+      await insertMusic(params);
+      setSuccessMessage("音楽が保存されました");
+      setIsSaved(false);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "保存エラーが発生しました";
+      console.error("保存エラー:", err);
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -125,10 +155,24 @@ function Create() {
 
       {generatedMusic && (
         <div>
-          <h3>Generated Music</h3>
-          <audio controls>
-            <source src={generatedMusic.music_file_path} type="audio/mpeg" />
-          </audio>
+          <div>
+            <h3>Generated Music</h3>
+            <audio controls>
+              <source src={generatedMusic.music_file_path} type="audio/mpeg" />
+            </audio>
+          </div>
+
+          {/* save button */}
+          {isSaved && (
+            <div>
+              <button
+                className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+                onClick={saveMusic}
+              >
+                Save Music
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
